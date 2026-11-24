@@ -13,4 +13,4 @@ Dostęp nadaje kierownik w manager.dysza.app (moduł „ZDZISŁAW”, rola „Za
 Strona nie zawiera żadnych danych. Po zalogowaniu dane przychodzą z funkcji bazy `zdzislaw_*`, które same pilnują dostępu.
 Powiadomienia wysyła funkcja `zdzislaw-push` (Web Push); treść jest szyfrowana dla jednego urządzenia.
 
-Wersja 2026-11-23 23:30 · 6487f14
+Wersja 2026-11-24 18:10 · a095e3a

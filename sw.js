@@ -1,9 +1,10 @@
-/* zdzislaw.dysza.app — program powiadomień w tle (service worker). Wersja 2026-11-23 23:30 · 6487f14. S40, 23.11.2026.
+/* zdzislaw.dysza.app — program powiadomień w tle (service worker). Wersja 2026-11-24 18:10 · a095e3a. S40, 23.11.2026.
    Dostaje powiadomienie od usługi przeglądarki (treść przychodzi zaszyfrowana, przeglądarka ją odszyfrowuje), pokazuje je
    i dopiero po pokazaniu odsyła do bazy potwierdzenie: numer powiadomienia i jego losowy znak (bez sesji osoby).
    Stuknięcie w powiadomienie otwiera aplikację. Niczego nie przechowuje — strona zawsze idzie z sieci. */
 var BAZA = 'https://srmiealxhcbjornmnboe.supabase.co';
 var KLUCZ = 'sb_publishable_NkiS-_7GBmW5d3ufWjjFEg_CuCpaADz';
+// obrazek i znaczek powiadomienia: adresy z wersją pliku wstawia zbuduj.py
 
 self.addEventListener('install', function () { self.skipWaiting(); });
 self.addEventListener('activate', function (e) { e.waitUntil(self.clients.claim()); });
@@ -25,7 +26,7 @@ function powiedzOknom(wiadomosc) {
 function naPush(e) {
   var d = {};
   try { d = e.data ? e.data.json() : {}; } catch (x) { d = { b: e.data ? e.data.text() : '' }; }
-  var opcje = { body: d.b || '', icon: 'ikona-192.png', badge: 'znaczek-96.png', lang: 'pl', data: { id: d.id, z: d.z, u: d.u || './' } };
+  var opcje = { body: d.b || '', icon: 'ikona-192.png?v=6aeb8c05', badge: 'znaczek-96.png?v=b1e8c794', lang: 'pl', data: { id: d.id, z: d.z, u: d.u || './' } };
   if (d.id) opcje.tag = 'zdz-' + d.id;                      // ponowiona wysyłka zastępuje to samo powiadomienie
   e.waitUntil(self.registration.showNotification(d.t || 'ZDZISŁAW', opcje)
     .then(function () { return potwierdz(d.id, d.z, 'pokazano'); })
